@@ -1,10 +1,17 @@
-# Postgres Client within a small Docker Container
+# Dockerized PostgreSQL Client
 
-[![Docker Automated buil](https://img.shields.io/docker/automated/tmaier/postgresql-client.svg)](https://hub.docker.com/r/tmaier/postgresql-client/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tmaier/postgresql-client.svg)](https://hub.docker.com/r/tmaier/postgresql-client/)
-[![GitHub issues](https://img.shields.io/github/issues/tmaier/docker-postgresql-client.svg)](https://github.com/tmaier/docker-postgresql-client/issues)
-[![GitHub stars](https://img.shields.io/github/stars/tmaier/docker-postgresql-client.svg?style=social&label=Star)](https://github.com/tmaier/docker-postgresql-client)
+Tiny alpine-based image of postgresql-client that includes e.g. `psql` and `pg_dump`.
 
-Recommended for usage within a [Kubernetes Init Container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+Available as both amd64 and arm64 images.
 
-Wait before starting the application till the database is up and running.
+Usage:
+
+```shell
+$ docker run -it --rm awestin/postgresql-client postgresql://username:password@host:port/db
+```
+
+To use any other utility such as `pg_dump`, specify it as the entrypoint:
+
+```shell
+$ docker run --rm --entrypoint pg_dump awestin/postgresql-client postgresql://username:password@host:port/db > dump.sql
+```
